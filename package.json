@@ -1,0 +1,53 @@
+{
+  "name": "forex-trading-ai",
+  "version": "1.0.0",
+  "description": "Forex Trading AI by Lumin Group",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win --x64"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^24.0.0"
+  },
+  "build": {
+    "appId": "com.lumingroup.forextradingai",
+    "productName": "Forex Trading AI",
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Forex Trading AI",
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico"
+    },
+    "files": [
+      "**/*",
+      "!node_modules"
+    ],
+    "extraResources": [
+      {
+        "from": "../dist/ForexTradingAI",
+        "to": "ForexTradingAI",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "publish": {
+      "provider": "github",
+      "owner": "davis-jemil",
+      "repo": "forex-trading-ai-app",
+      "releaseType": "release"
+    }
+  },
+  "dependencies": {
+    "electron-updater": "^6.8.9"
+  }
+}

@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Forex Trading AI</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #1a1a2e;
+      color: #ffffff;
+      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      -webkit-app-region: drag;
+    }
+
+    /* ── logo ── */
+    .logo-circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: 900;
+      color: #1a1a2e;
+      letter-spacing: -1px;
+      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+      margin-bottom: 18px;
+    }
+
+    /* ── title ── */
+    .app-title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-bottom: 4px;
+    }
+
+    .app-version {
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 28px;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── status text ── */
+    .status {
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 14px;
+      min-height: 16px;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── progress bar ── */
+    .progress-track {
+      width: 200px;
+      height: 3px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #f59e0b, #fbbf24);
+      border-radius: 999px;
+      transition: width 0.4s ease;
+    }
+
+    /* ── footer ── */
+    .footer {
+      font-size: 10px;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo-circle">FX</div>
+  <div class="app-title">Forex Trading AI</div>
+  <div class="app-version">v1.0.0</div>
+
+  <div class="status" id="statusText">Starting up<span id="dots"></span></div>
+
+  <div class="progress-track">
+    <div class="progress-fill" id="progressBar"></div>
+  </div>
+
+  <div class="footer">Built by Lumin Group, Liberia</div>
+
+  <script>
+    // ── animated dots ──────────────────────────────────────────────────────────
+    let dotCount = 0;
+    setInterval(() => {
+      dotCount = (dotCount + 1) % 4;
+      document.getElementById('dots').textContent = '.'.repeat(dotCount);
+    }, 400);
+
+    // ── progress bar animation ─────────────────────────────────────────────────
+    // Simulates progress while Flask loads; actual completion is signalled
+    // by the main process closing this window.
+    const bar = document.getElementById('progressBar');
+    const statusEl = document.getElementById('statusText');
+    let progress = 0;
+
+    const steps = [
+      { pct: 15,  label: 'Loading modules',     delay: 400  },
+      { pct: 35,  label: 'Starting Flask',       delay: 1200 },
+      { pct: 55,  label: 'Connecting to MT5',    delay: 2200 },
+      { pct: 75,  label: 'Loading market data',  delay: 3400 },
+      { pct: 90,  label: 'Almost ready',         delay: 4800 },
+    ];
+
+    steps.forEach(({ pct, label, delay }) => {
+      setTimeout(() => {
+        bar.style.width = pct + '%';
+        statusEl.innerHTML = label + '<span id="dots"></span>';
+        // restart dots on new label
+        dotCount = 0;
+      }, delay);
+    });
+  </script>
+
+</body>
+</html>
